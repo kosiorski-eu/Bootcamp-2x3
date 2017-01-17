@@ -1,26 +1,25 @@
-(function($) {
+function fetchh (url, succses, error){
+        var xhr = new XMLHttpRequest();
+            xhr.open("GET",url,true);
+            xhr.onload = function()
+            {
+                if(xhr.status == 200)
+                    console.log("Wszystko się powiodło");
+                else
+                    console.log ("Wystąpił błąd. Status: " +xhr.status);
+            };
+            xhr.onerror = function(){
+                console.log("Error status: " + xhr.status);
+            };
+            xhr.send();
+}
+var btn = document.querySelector("button");
 
-    $(document).ready(function() {
-		
-		//wszystkie elementy <div>, posiadające zarówno klasę “grid” oraz klasę “grid-12”
-		var div = $("div.grid, div.grid-12");
-		
-		//wszystkie elementy <a>, których atrybut “href" zaczyna się na “http”, znajdujące się w elemencie o klasie “nav”
-		var a = $(".nav a[href^='http']");
-		
-		//wszystkie elementy <input>, których typ to “radio” lub “checkbox” oraz dodatkowo nie są aktualnie zaznaczone (checked)
-		var input = $("input[type='radio'], input[type='checkbox']").not(":checked");
-		
-		//wyłącznie pierwszy element <p>, który jest pusty (nie zawiera dzieci) oraz znajduje się w elemencie <div> z identyfikatorem “text“
-		var p = $("div#text p:first:empty");
-		
-		//wszystkie elementy z klasą “pagination-item”, które nie są elementem <span>
-		var i = $(":not(span).pagination-item");
-
-    });
-
-})(jQuery);
-
+btn.addEventListener("click",function(data) {
+            fetchh("https://jsonplaceholder.typicode.com/users",
+                function(response){console.log("Powidoło się");},
+                function(error){console.log("Nie powiodło się");}
+)},true);
 
 
 
